@@ -10,32 +10,47 @@ if (arguments.length < 2) {
   process.exit();
 }
 
+const convertToNum = function (numbers) {
+  const outputArr = [];
+
+  for (let nb of numbers) {
+    outputArr.push(Number(nb));
+  }
+
+  return outputArr;
+};
 
 // goes through each
 // for let i = 0 => c-style loop
 // for of
 // for each
-let total = 0;
 
-for (let nb of arguments) {
-  // prints out the sum of them
-  // Edge case: If any argument is not a number, output an error message.
-  // Edge Case: If any argument is not a whole number, skip it
-  // if (Number(nb) % 1 === 0) {
+const sum = function (numbers) {
+  let total = 0;
+  console.log('numbers', numbers);
+  for (let nb of numbers) {
+    // prints out the sum of them
+    // Edge case: If any argument is not a number, output an error message.
+    // Edge Case: If any argument is not a whole number, skip it
+    // if (Number(nb) % 1 === 0) {
 
-  const convertedNb = Number(nb);
+    // const convertedNb = Number(nb);
 
-  if (isNaN(convertedNb)) {
-    console.log(`Error: please input only numbers`);
-    process.exit(); // exit the script
+    if (isNaN(nb)) {
+      console.log(`Error: please input only numbers`);
+      process.exit(); // exit the script
+    }
+
+    if (Number.isInteger(nb)) {
+      // typecast
+      total += nb;
+    }
+
+    console.log('nb:', nb, 'total:', total);
   }
+  return total;
+};
 
-  if (Number.isInteger(convertedNb)) {
-    // typecast
-    total += convertedNb;
-  }
+const result = sum(convertToNum(arguments));
 
-  console.log('nb:', nb, 'total:', total);
-}
-
-console.log('Total:', total);
+console.log('Result:', result);
